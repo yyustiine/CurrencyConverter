@@ -11,3 +11,5 @@
 > 🌐requests
 > 
 > 📊matplotlib
+> 
+> Ielādēt var ar komandu: `pip install -r requirements.txt`
