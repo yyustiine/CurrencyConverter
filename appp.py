@@ -43,3 +43,13 @@ def index():
     
     if request.method == "POST":
         action = request.form.get("action")
+
+        if action == "top10":
+            base_currency = request.form.get("base_currency", "").upper()
+            if base_currency in CURRENCIES:
+                other_currencies = [cur for cur in CURRENCIES if cur != base_currency]
+                url = f"{BASE_URL}&base={base_currency}&currencies={','.join(other_currencies)}"
+                
+                try:
+                    response = requests.get(url)
+                    data = response.json()["dataa"]
