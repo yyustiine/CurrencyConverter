@@ -21,21 +21,25 @@ def draw_chart(currency_code, rates, dates):
     if os.path.exists(chart_path):
         os.remove(chart_path)
         
-    plt.figure(figsize=(10, 5))
-    plt.plot(time_labels, rates, color="green")
-    plt.title(f'{currency} to USD')
-    plt.xlabel("Time")
-    plt.ylabel("Rate")
+    plt.style.use('dark_background')
+    plt.figure(figsize=(8, 4))
+    plt.plot(dates, rates, marker='o', linestyle='-', color='#00ff99')
+    plt.title(f'{currency_code} to USD - Last year')
+    plt.xlabel('Date')
+    plt.ylabel('Rate')
+    plt.xticks(rotation=45)
+    plt.grid(True)
     plt.tight_layout()
-    plt.savefig("currency_chart/static/chart.png")
+    plt.savefig(chart_path)
     plt.close()
+
+    return chart_path
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     top10_output = ""
-    converted_result = ""
-    chart_link = None
+    converted_output = ""
+    chart_url = None
     
-    if action == "top10":
-        if request.method == "POST":
-            if base_currency in CURRENCIES:
+    if request.method == "POST":
+        action = request.form.get("action")
