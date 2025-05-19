@@ -23,3 +23,11 @@ def draw_chart(currency, rates, time_labels):
     plt.xlabel("Time")
     plt.ylabel("Rate")
     plt.tight_layout()
+    plt.savefig("currency_chart/static/chart.png")
+    plt.close()
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    top10_output = ""
+    converted_result = ""
+    chart_link = None
