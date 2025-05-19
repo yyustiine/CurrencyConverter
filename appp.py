@@ -31,3 +31,7 @@ def index():
     top10_output = ""
     converted_result = ""
     chart_link = None
+    
+    if action == "top10":
+        if request.method == "POST":
+            if base_currency in CURRENCIES:
