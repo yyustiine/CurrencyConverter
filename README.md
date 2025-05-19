@@ -36,3 +36,41 @@
 📊`Kursa izmaiņu grafiks`: Ar matplotlib palīdzību tiek uzzīmēts vēsturisks valūtas kurss pret USD, pamēnešiem viena gada laika periodā. Grafiks tiek automātiski saglabāts kā attēls `static/chart.png`. Grafiks tiek attēlots zem top 10 konversijas rezultātiem.
 
 ---
+
+## Izmantoto Python bibliotēku saraksts un izmantošanas skaidrojums🐍
+
+Šajā projektā izmantotas šadas bibliotēkas:
+
+- `Flask`: Viegls tīmekļa ietvars, kas ļauj apkalpot HTML formas un parādīt dinamisku informāciju.
+- `requests`: Nodrošina ērtu veidu, kā veikt HTTP pieprasījums API servisiem.
+- `matplotlib`: Tiek izmantota grafika uzzīmēšanai - šeit tā ģenerē kursa izmaiņu līniju diagrammu.
+- `os`: Palīdz pārvaldīt ceļus un dzēst iepriekšējo grafiku pirms jaunā ģenerēšanas.
+- `datetime`: Lietota, lai aprēķinātu un formatētu datums kursa pieprasījumiem.
+
+---
+
+## Programmatūras izmantošanas metodes 🧠
+
+Lietotni iespējams izmantot šādos veidos:
+
+1. 🧳 **Ceļotājiem:** Ātri pārrēķināt valūtas jebkurā valstī.
+2. 📈 **Finanšu analītiķiem:** Pārbaudīt, kā izvēlētās valūtas kurss ir mainījies pēdējo mēnešu laikā.
+3. 🧪 **Studentiem un skolotājiem:** Analizēt ekonomikas un finanšu tēmas ar vizuālu atbalstu.
+4. 🧰 **Izglītības mērķiem:** Projekts parāda, kā savienot HTML, Python, API un datu vizualizāciju.
+
+---
+
+## Programmatūras konfigurēšana un palaišana⚙️
+1. Klonēt GitHub repozitoriju.
+2. Instalēt vajadzīgās bibliotēkas.
+3. Pārliecināties, ka mape `static/` eksistē (app.py fails to izveido automātiski).
+4. Palaist programmu ar komandu: python app.py
+5. Atvērt pārlūkprogrammā: `http://127.0.0.1:5000/`
+
+---
+
+## Izmantotie avoti 🖼 
+
+1. https://freecurrecyapi.com/ - API valūtas datu iegūšanai.
+2. https://matplotlib.org/ - Dokumentācija par grafiku zīmēšanu ar `matplotlib`.
+3. https://flas.palletsprojekts.com/ - Flask oficiālā dokumentācija.
