@@ -15,7 +15,7 @@ def draw_chart(currency_code, rates, dates):
         os.remove('currency_chart_fixed/static/chart.png')
     plt.style.use('dark_background')
     plt.figure(figsize=(8, 4))
-    plt.plot(dates, rates, marker='o', linestyle='-', color='#00ff99')
+    plt.plot(dates, rates, marker='o', linestyle='-', color='#8ACE00')
     plt.title(f'{currency_code} to USD - Last year')
     plt.xlabel('Date')
     plt.ylabel('Rate')
