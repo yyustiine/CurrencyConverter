@@ -89,3 +89,8 @@ def index():
             except:
                 converted_output = "Conversion error."
 
+   return render_template("index.html", top10=top10_output, amount_result=converted_output, chart_url=chart_url)
+
+if __name__ == "__main__":
+    os.makedirs("currency_chart_fixed/static", exist_ok=True)
+    app.run(debug=True)
