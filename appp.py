@@ -67,10 +67,12 @@ def index():
                 if rates:
                     draw_chart(base, rates, dates)
                     chart_url = f"/static/chart.png?ts={int(datetime.datetime.now().timestamp())}"
+
+                   
          elif action == "convert":
             try:
                 amount = float(request.form.get("amount"))
-                from_cur = request.form.get("from_currrency", "").upper()
                 to_cur = request.form.get("to_currency", "").upper()
-                dropdown = request.form.get("dropdownCurrency")
+                dropdown = request.form.get("dropdownCurrancy")
+                if from_cur and to_cur and amount >= 0:
 
