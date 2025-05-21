@@ -73,4 +73,4 @@ Lietotni iespējams izmantot šādos veidos:
 
 1. https://freecurrecyapi.com/ - API valūtas datu iegūšanai.
 2. https://matplotlib.org/ - Dokumentācija par grafiku zīmēšanu ar `matplotlib`.
-3. https://flas.palletsprojekts.com/ - Flask oficiālā dokumentācija.
+3. https://palletsprojects.com/projects/flask - Flask oficiālā dokumentācija.
