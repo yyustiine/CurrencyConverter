@@ -55,4 +55,22 @@ def index():
                     date_obj = today - datetime.timedelta(days=i*30)
                     date_str = date_obj.strftime('%Y-%m-%d')
                     url = f"{HISTORICAL_URL}?apikey={API_KEY}&base_currency={base}&currencies=USD&date={date_str}"
-                  except:
+                    try:
+                        res = requests.get(url)
+                        data = res.json().get('data', {}).get(date_str, {})
+                        rate = data.get("USD")
+                        if rate:
+                            dates.append(date_obj.strftime('%Y-%m'))
+                            rates.append(rate)
+                    except:
+                        continue
+                if rates:
+                    draw_chart(base, rates, dates)
+                    chart_url = f"/static/chart.png?ts={int(datetime.datetime.now().timestamp())}"
+         elif action == "convert":
+            try:
+                amount = float(request.form.get("amount"))
+                from_cur = request.form.get("from_currrency", "").upper()
+                to_cur = request.form.get("to_currency", "").upper()
+                dropdown = request.form.get("dropdownCurrency")
+
