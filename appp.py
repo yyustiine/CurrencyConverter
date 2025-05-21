@@ -13,7 +13,6 @@ CURRENCIES = ["USD", "CAD", "EUR", "AUD", "CNY", "GBP", "CHF", "JPY", "HKD", "SG
 def draw_chart(currency_code, rates, dates):
    if os.path.exists('currency_chart_fixed/static/chart.png'):
         os.remove('currency_chart_fixed/static/chart.png')
-          
     plt.style.use('dark_background')
     plt.figure(figsize=(8, 4))
     plt.plot(dates, rates, marker='o', linestyle='-', color='#00ff99')
@@ -23,9 +22,9 @@ def draw_chart(currency_code, rates, dates):
     plt.xticks(rotation=45)
     plt.grid(True)
     plt.tight_layout()
+    chart_path = os.path.join('currency_chart_fixed/static', 'chart.png')
     plt.savefig(chart_path)
     plt.close()
-
     return chart_path
 
 @app.route("/", methods=["GET", "POST"])
@@ -49,3 +48,11 @@ def index():
                         top10_output = f"Base: {base}\n\n" + "\n".join(f"{k}: {v}" for k, v in data.items())
                 except:
                     top10_output = "Error fetching data."
+                   
+                today = datetime.date.today()
+                dates, rates = [], []
+                for i in range(11, -1, -1):
+                    date_obj = today - datetime.timedelta(days=i*30)
+                    date_str = date_obj.strftime('%Y-%m-%d')
+                    url = f"{HISTORICAL_URL}?apikey={API_KEY}&base_currency={base}&currencies=USD&date={date_str}"
+                  except:
