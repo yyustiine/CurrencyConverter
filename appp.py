@@ -72,7 +72,20 @@ def index():
          elif action == "convert":
             try:
                 amount = float(request.form.get("amount"))
+                from_cur = request.form.get("from_currency", "").upper()
                 to_cur = request.form.get("to_currency", "").upper()
                 dropdown = request.form.get("dropdownCurrancy")
+                if dropdown:
+                    to_cur = dropdown
                 if from_cur and to_cur and amount >= 0:
+                    url = f"{BASE_URL}&base_currency={from_cur}&currencies={to_cur}"
+                    res = requests.get(url)
+                    rate = res.json().get("data", {}).get(to_cur)
+                    if rate:
+                        converted = amount * rate
+                        converted_output = f"{amount} {from_cur} = {converted:.2f} {to_cur}"
+                    else:
+                        converted_output = "Invalid conversion."
+            except:
+                converted_output = "Conversion error."
 
