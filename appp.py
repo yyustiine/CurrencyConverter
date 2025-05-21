@@ -1,26 +1,19 @@
 from flask import Flask, render_template, request
 import requests
-import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import datetime
 import os
 
 app = Flask(__name__, static_folder="currency_chart/static")
-
 API_KEY = 'fca_live_xa0BIncYUXOowI2zzWTs7xjCvAEB7QGdlUi7Of2o'
 BASE_URL = f"https://api.freecurrencyapi.com/v1/latest?apikey={API_KEY}"
 HISTORICAL_URL = "https://api.freecurrencyapi.com/v1/historical"
 CURRENCIES = ["USD", "CAD", "EUR", "AUD", "CNY", "GBP", "CHF", "JPY", "HKD", "SGD"]
 
 def draw_chart(currency_code, rates, dates):
-    chart_dir = 'currency_chart_fixed/static'
-    chart_path = os.path.join(chart_dir, 'chart.png')
-
-    os.makedirs(chart_dir, exist_ok=True)
-    if os.path.exists(chart_path):
-        os.remove(chart_path)
-        
+   if os.path.exists('currency_chart_fixed/static/chart.png'):
+        os.remove('currency_chart_fixed/static/chart.png')
+          
     plt.style.use('dark_background')
     plt.figure(figsize=(8, 4))
     plt.plot(dates, rates, marker='o', linestyle='-', color='#00ff99')
@@ -45,11 +38,14 @@ def index():
         action = request.form.get("action")
 
         if action == "top10":
-            base_currency = request.form.get("base_currency", "").upper()
-            if base_currency in CURRENCIES:
-                other_currencies = [cur for cur in CURRENCIES if cur != base_currency]
-                url = f"{BASE_URL}&base={base_currency}&currencies={','.join(other_currencies)}"
-                
+            base = request.form.get("base_currency", "").upper()
+            if base and base in CURRENCIES:
+                filtered = [c for c in CURRENCIES if c != base]
+                url = f"{BASE_URL}&base_currency={base}&currencies={','.join(filtered)}"
                 try:
-                    response = requests.get(url)
-                    data = response.json()["dataa"]
+                    res = requests.get(url)
+                    data = res.json().get("data", {})
+                    if data:
+                        top10_output = f"Base: {base}\n\n" + "\n".join(f"{k}: {v}" for k, v in data.items())
+                except:
+                    top10_output = "Error fetching data."
