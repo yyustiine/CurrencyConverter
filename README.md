@@ -61,7 +61,7 @@ Lietotni iespējams izmantot šādos veidos:
 ---
 
 ## Programmatūras konfigurēšana un palaišana⚙️
-1. Klonēt GitHub repozitoriju.
+1. Instalēt currencyconvfin.7z mapi.
 2. Instalēt vajadzīgās bibliotēkas.
 3. Pārliecināties, ka mape `static/` eksistē (app.py fails to izveido automātiski).
 4. Palaist programmu ar komandu: python app.py
